@@ -1,0 +1,40 @@
+{
+    "name": "radmas/vich-jms-integration",
+    "type": "symfony-bundle",
+    "description": "Easy integration between VichUploaderBundle and JMSSerializerBundle",
+    "keywords": ["bundle integration", "integration"],
+    "homepage": "https://github.com/radmas/VichJmsIntegrationBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jorge García",
+            "email": "draco19892002@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "~2.0",
+        "jms/metadata": "~1.5",
+        "symfony/finder": ">=2.0",
+        "symfony/property-access": "~2.3"
+    },
+    "require-dev": {
+        "doctrine/orm": "@stable",
+        "doctrine/mongodb-odm": "@dev",
+        "knplabs/knp-gaufrette-bundle": "*",
+        "phpunit/phpunit": "~3.7",
+        "mikey179/vfsStream": "~1.0",
+        "symfony/yaml": "@stable"
+    },
+    "suggest": {
+        "doctrine/orm": "*",
+        "doctrine/doctrine-bundle": "*",
+        "doctrine/mongodb-odm-bundle": "*",
+        "knplabs/knp-gaufrette-bundle": "*",
+        "symfony/yaml": "@stable"
+    },
+    "autoload": {
+        "psr-0": { "Radmas\\VichJmsIntegrationBundle": "" }
+    },
+    "target-dir": "Radmas/VichJmsIntegrationBundle"
+}
