@@ -1,6 +1,6 @@
 <?php
 
-namespace VichJmsIntegrationBundle\Annotation;
+namespace Radmas\VichJmsIntegrationBundle\Annotation;
 
 
 /**

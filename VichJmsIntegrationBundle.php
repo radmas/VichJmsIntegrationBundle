@@ -1,6 +1,6 @@
 <?php
 
-namespace Radmas;
+namespace Radmas\VichJmsIntegrationBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -9,6 +9,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * @author Jorge García (draco19892002@gmail.com)
  */
-class VichJmsIntegrationBundle extends Bundle
+class RadmasVichJmsIntegrationBundle extends Bundle
 {
 }

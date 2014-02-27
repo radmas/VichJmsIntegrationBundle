@@ -6,7 +6,7 @@
  * Time: 18:14
  */
 
-namespace VichJmsIntegrationBundle\Listener;
+namespace Radmas\VichJmsIntegrationBundle\Listener;
 
 use Doctrine\Common\Annotations\FileCacheReader;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
