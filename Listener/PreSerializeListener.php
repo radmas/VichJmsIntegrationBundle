@@ -12,8 +12,6 @@ use Doctrine\Common\Annotations\FileCacheReader;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Metadata\ClassMetadata;
-use Radmas\Open010Bundle\Annotation\VichSerializable;
-use Radmas\Open010Bundle\Annotation\VichSerializableClass;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 /**
@@ -24,6 +22,7 @@ use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 class PreSerializeListener implements EventSubscriberInterface {
 
     private static $FIELD_ANNOTATION = 'Radmas\VichJmsIntegrationBundle\Annotation\VichSerializable';
+    private static $CLASS_ANNOTATION = 'Radmas\VichJmsIntegrationBundle\Annotation\VichSerializableClass';
 
     private $vich;
     private $annotations;
@@ -44,7 +43,7 @@ class PreSerializeListener implements EventSubscriberInterface {
     public function onPreSerialize(ObjectEvent $event){
         $serializable = $this->annotations->getClassAnnotation(
             new \ReflectionClass($event->getObject()),
-            get_class(new VichSerializableClass())
+            self::$CLASS_ANNOTATION
         );
 
         if(!is_null($serializable)) {
