@@ -1,6 +1,6 @@
 <?php
 
-namespace Radmas\UploaderBundle;
+namespace Radmas;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
