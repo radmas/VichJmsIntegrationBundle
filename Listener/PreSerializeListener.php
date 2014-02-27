@@ -23,7 +23,7 @@ use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
  */
 class PreSerializeListener implements EventSubscriberInterface {
 
-    private static $FIELD_ANNOTATION = 'Radmas\Open010Bundle\Annotation\VichSerializable';
+    private static $FIELD_ANNOTATION = 'Radmas\VichJmsIntegrationBundle\Annotation\VichSerializable';
 
     private $vich;
     private $annotations;
