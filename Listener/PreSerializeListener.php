@@ -52,7 +52,7 @@ class PreSerializeListener implements EventSubscriberInterface {
             foreach($class->getProperties() as $property){
                 $property_annotation = $this->annotations->getPropertyAnnotation($property, self::$FIELD_ANNOTATION);
 
-                if(!is_null($property_annotation) && $property_annotation instanceof VichSerializable){
+                if(!is_null($property_annotation)){
                     $field = $property_annotation->getField();
 
                     if($field){
