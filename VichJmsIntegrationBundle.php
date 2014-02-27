@@ -1,6 +1,6 @@
 <?php
 
-namespace Vich\UploaderBundle;
+namespace Radmas\UploaderBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
