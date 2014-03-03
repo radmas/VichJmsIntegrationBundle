@@ -71,4 +71,3 @@ class PreSerializeListener implements EventSubscriberInterface {
         return str_replace(' ', '',ucwords(str_replace('_', ' ', $field)));
     }
 }
-7
