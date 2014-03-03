@@ -52,18 +52,23 @@ class PreSerializeListener implements EventSubscriberInterface {
             foreach($class->getProperties() as $property){
                 $property_annotation = $this->annotations->getPropertyAnnotation($property, self::$FIELD_ANNOTATION);
 
-                if(!is_null($property_annotation) && $property_annotation instanceof VichSerializable){
+                if(!is_null($property_annotation)){
                     $field = $property_annotation->getField();
+                    $setMethod = 'set' . $this->fieldToMethod($property->getName());
+                    $getMethod = 'get' . $this->fieldToMethod($property->getName());
 
-                    if($field){
+                    if($field && $event->getObject()->$getMethod()){
                         $url = $this->vich->asset($event->getObject(), $property_annotation->getField());
 
-                        $method = 'set' . str_replace(' ', '',ucwords(str_replace('_', ' ', $property->getName())));
-
-                        $event->getObject()->$method($url);
+                        $event->getObject()->$setMethod($url);
                     }
                 }
             }
         }
     }
+
+    private function fieldToMethod($field){
+        return str_replace(' ', '',ucwords(str_replace('_', ' ', $field)));
+    }
 }
+7
