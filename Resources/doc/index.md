@@ -14,7 +14,7 @@ To use the bundle functionality you must add two annotations to the serialized c
 
 namespace Acme\DemoBundle\Entity;
 
-use VichJmsIntegrationBundle\Annotation as VichJMS;
+use Radmas\VichJmsIntegrationBundle\Annotation as VichJMS;
 
 /**
  * @VichJMS\VichSerializableClass
