@@ -12,6 +12,7 @@ use Doctrine\Common\Annotations\FileCacheReader;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Metadata\ClassMetadata;
+use Monolog\Logger;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 /**
@@ -26,11 +27,13 @@ class PreSerializeListener implements EventSubscriberInterface {
 
     private $vich;
     private $annotations;
+    private $logger;
 
-    function __construct(UploaderHelper $vich, FileCacheReader $annotations)
+    function __construct(UploaderHelper $vich, FileCacheReader $annotations, Logger $logger)
     {
         $this->annotations = $annotations;
         $this->vich = $vich;
+        $this->logger = $logger;
     }
 
     public static function getSubscribedEvents()
@@ -53,12 +56,16 @@ class PreSerializeListener implements EventSubscriberInterface {
                 $property_annotation = $this->annotations->getPropertyAnnotation($property, self::$FIELD_ANNOTATION);
 
                 if(!is_null($property_annotation)){
+                    $this->logger->debug('Serializing ' . $property->getName() . ' property from ' . $class->getName());
+
                     $field = $property_annotation->getField();
                     $setMethod = 'set' . $this->fieldToMethod($property->getName());
                     $getMethod = 'get' . $this->fieldToMethod($property->getName());
 
                     if($field && $event->getObject()->$getMethod()){
                         $url = $this->vich->asset($event->getObject(), $property_annotation->getField());
+
+                        $this->logger->debug('AmazonS3 base URL is: ' . $url);
 
                         $event->getObject()->$setMethod($url);
                     }

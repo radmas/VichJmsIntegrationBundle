@@ -1,6 +1,6 @@
 services:
     vich_jms.pre_serializer.listener:
         class: Radmas\VichJmsIntegrationBundle\Listener\PreSerializeListener
-        arguments: { vich_helper: @vich_uploader.templating.helper.uploader_helper, reader: @annotation_reader }
+        arguments: { vich_helper: @vich_uploader.templating.helper.uploader_helper, reader: @annotation_reader, logger: @logger }
         tags:
             - { name: 'jms_serializer.event_subscriber' }
