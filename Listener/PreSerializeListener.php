@@ -51,6 +51,7 @@ class PreSerializeListener implements EventSubscriberInterface {
 
         if(!is_null($serializable)) {
             $class = new \ReflectionClass($event->getObject());
+            $this->logger->debug('Detected vich-jms serializable class ==>' . $class->getName());
 
             foreach($class->getProperties() as $property){
                 $property_annotation = $this->annotations->getPropertyAnnotation($property, self::$FIELD_ANNOTATION);
