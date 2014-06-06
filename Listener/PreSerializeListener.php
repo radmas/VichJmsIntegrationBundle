@@ -59,23 +59,17 @@ class PreSerializeListener implements EventSubscriberInterface {
                 if(!is_null($property_annotation)){
                     $this->logger->debug('Serializing ' . $property->getName() . ' property from ' . $class->getName());
 
-                    $field = $property_annotation->getField();
-                    $setMethod = 'set' . $this->fieldToMethod($property->getName());
-                    $getMethod = 'get' . $this->fieldToMethod($property->getName());
+                    $property->setAccessible(true);
 
-                    if($field && $event->getObject()->$getMethod()){
+                    if($property_annotation->getField() && !preg_match('/https{0,1}:\/\//', $property->getValue($event->getObject()))){
                         $url = $this->vich->asset($event->getObject(), $property_annotation->getField());
-
                         $this->logger->debug('AmazonS3 base URL is: ' . $url);
 
-                        $event->getObject()->$setMethod($url);
+                        $property->setAccessible(true);
+                        $property->setValue($event->getObject(), $url);
                     }
                 }
             }
         }
-    }
-
-    private function fieldToMethod($field){
-        return str_replace(' ', '',ucwords(str_replace('_', ' ', $field)));
     }
 }
