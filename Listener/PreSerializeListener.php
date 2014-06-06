@@ -62,11 +62,14 @@ class PreSerializeListener implements EventSubscriberInterface {
                     $property->setAccessible(true);
 
                     if($property_annotation->getField() && !preg_match('/https{0,1}:\/\//', $property->getValue($event->getObject()))){
-                        $url = $this->vich->asset($event->getObject(), $property_annotation->getField());
-                        $this->logger->debug('AmazonS3 base URL is: ' . $url);
 
-                        $property->setAccessible(true);
-                        $property->setValue($event->getObject(), $url);
+                        if($property->getValue($event->getObject())){
+                            $url = $this->vich->asset($event->getObject(), $property_annotation->getField());
+                            $this->logger->debug('AmazonS3 base URL is: ' . $url);
+
+                            $property->setAccessible(true);
+                            $property->setValue($event->getObject(), $url);
+                        }
                     }
                 }
             }
