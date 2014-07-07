@@ -28,6 +28,7 @@ class PreSerializeListener implements EventSubscriberInterface {
     private $vich;
     private $annotations;
     private $logger;
+    private $visited = array();
 
     function __construct(UploaderHelper $vich, FileCacheReader $annotations, Logger $logger)
     {
@@ -50,7 +51,13 @@ class PreSerializeListener implements EventSubscriberInterface {
         );
 
         if(!is_null($serializable)) {
-            $class = new \ReflectionClass($event->getObject());
+            $object = $event->getObject();
+            $objId = spl_object_hash($object);
+            if (array_key_exists($objId, $this->visited)) {
+                return;
+            }
+
+            $class = new \ReflectionClass($object);
             $this->logger->debug('Detected vich-jms serializable class ==>' . $class->getName());
 
             foreach($class->getProperties() as $property){
@@ -73,6 +80,8 @@ class PreSerializeListener implements EventSubscriberInterface {
                     }
                 }
             }
+
+            $this->visited[$objId] = true;
         }
     }
 }
